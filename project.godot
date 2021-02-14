@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node",
+"base": "Node2D",
 "class": "Doctor",
 "language": "GDScript",
 "path": "res://src/doctor.gd"
@@ -33,13 +33,19 @@ _global_script_classes=[ {
 "class": "Room",
 "language": "GDScript",
 "path": "res://src/room.gd"
+}, {
+"base": "Node2D",
+"class": "Status",
+"language": "GDScript",
+"path": "res://src/status.gd"
 } ]
 _global_script_class_icons={
 "Doctor": "",
 "Elevator": "",
 "Floor": "",
 "Patient": "",
-"Room": ""
+"Room": "",
+"Status": ""
 }
 
 [application]

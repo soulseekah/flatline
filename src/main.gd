@@ -6,11 +6,18 @@ var beds: Dictionary = {}
 var doctor: Doctor
 var room: Room
 var level: Floor
+var status: Status
 
 var can_move: bool
 
 func _ready():
 	randomize()
+	
+	var Status: PackedScene = preload("res://ui/status.tscn")
+	self.status = Status.instance()
+	self.status.z_index = 2
+	
+	self.call_deferred("add_child", self.status)
 	
 	# Create beds in our hospital
 	for f in range(1, 10):
@@ -24,6 +31,7 @@ func _ready():
 				}
 	
 	self.call_deferred("remove_child", get_node("Title"))
+	
 	self._enter_level(100)
 	
 func _enter_level(number: int):

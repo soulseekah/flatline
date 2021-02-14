@@ -25,14 +25,16 @@ func set_doctor(doctor: Doctor, room: int):
 		door.position.x = i * 240
 		self.doors.add_child(door)
 	
-	# center on door number
-	self.doors.position.x += 64 + 16 + 240 - (240 * (room % 10))
-	self.add_child(doors)
+	self.add_child(self.doors)
+	self._scroll_into_view(self.doors.get_child(room % 100))
 	
 	self.doctor = doctor
-	self.doctor.position.x = 640 / 2
+	if room % 100 in [0, 10]:
+		self.doctor.position.x = 80 if room % 100 == 0 else 560
+	else:
+		self.doctor.position.x = 640/2
 	self.doctor.position.y = 320
-
+	
 	self.add_child(self.doctor)
 
 func _get_door_index():
@@ -53,7 +55,11 @@ func next_door():
 	return self._scroll_into_view(self.doors.get_child(self.room))
 	
 func _scroll_into_view(door: Node2D):
-	if (door.position.x > 200 and door.position.x < 2300):
+	if door.position.x < 200:
+		self.doors.position.x = 80
+	elif door.position.x > 2300:
+		self.doors.position.x = -1840
+	else:
 		if (door.global_position.x != 320):
 			self.doors.position.x += 320 - door.global_position.x
 	return door

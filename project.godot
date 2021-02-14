@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://src/doctor.gd"
 }, {
 "base": "Node2D",
+"class": "Elevator",
+"language": "GDScript",
+"path": "res://src/elevator.gd"
+}, {
+"base": "Node2D",
 "class": "Floor",
 "language": "GDScript",
 "path": "res://src/floor.gd"
@@ -31,6 +36,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Doctor": "",
+"Elevator": "",
 "Floor": "",
 "Patient": "",
 "Room": ""

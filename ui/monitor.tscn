@@ -1,3 +1,139 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/monitor.gd" type="Script" id=1]
 
 [node name="Monitor" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="beta" type="Button" parent="."]
+modulate = Color( 0.196078, 0.196078, 0.196078, 1 )
+margin_left = -152.0
+margin_top = -37.0
+margin_right = -16.0
+margin_bottom = -17.0
+custom_colors/font_color_disabled = Color( 0.972549, 0.972549, 0.972549, 1 )
+disabled = true
+text = "beta blockers"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sympathomimetics" type="Button" parent="."]
+modulate = Color( 0.196078, 0.196078, 0.196078, 1 )
+margin_left = -152.0
+margin_top = -8.0
+margin_right = -16.0
+margin_bottom = 12.0
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+disabled = true
+text = "sympathomimetics"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="connect" type="Button" parent="."]
+modulate = Color( 0.196078, 0.196078, 0.196078, 1 )
+margin_left = -152.0
+margin_top = -69.0
+margin_right = -16.0
+margin_bottom = -49.0
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+disabled = true
+text = "connect"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="cpr" type="Button" parent="."]
+modulate = Color( 0.196078, 0.196078, 0.196078, 1 )
+margin_left = -152.0
+margin_top = 21.0
+margin_right = -16.0
+margin_bottom = 41.0
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+disabled = true
+text = "CPR"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="difibrillate" type="Button" parent="."]
+modulate = Color( 0.196078, 0.196078, 0.196078, 1 )
+margin_left = -152.0
+margin_top = 56.0
+margin_right = -16.0
+margin_bottom = 76.0
+custom_colors/font_color_disabled = Color( 1, 1, 1, 1 )
+disabled = true
+text = "difibrillate"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="hr" type="ColorRect" parent="."]
+modulate = Color( 0.196078, 0.196078, 0.196078, 1 )
+margin_left = 16.0
+margin_top = -72.0
+margin_right = 208.0
+margin_bottom = -8.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bpm" type="RichTextLabel" parent="hr"]
+modulate = Color( 0.196078, 0.196078, 0.196078, 1 )
+margin_left = 120.0
+margin_top = 24.0
+margin_right = 184.0
+margin_bottom = 56.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "129 bpm"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bp" type="ColorRect" parent="."]
+modulate = Color( 0.196078, 0.196078, 0.196078, 1 )
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 208.0
+margin_bottom = 80.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sys" type="RichTextLabel" parent="bp"]
+modulate = Color( 0.196078, 0.196078, 0.196078, 1 )
+margin_left = 78.0
+margin_top = 8.0
+margin_right = 189.0
+margin_bottom = 24.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "120 mm/Hg sys"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="dia" type="RichTextLabel" parent="bp"]
+modulate = Color( 0.196078, 0.196078, 0.196078, 1 )
+margin_left = 88.0
+margin_top = 40.0
+margin_right = 200.0
+margin_bottom = 56.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "80 mm/Hg dia"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="name" type="RichTextLabel" parent="."]
+modulate = Color( 0.196078, 0.196078, 0.196078, 1 )
+margin_left = -72.0
+margin_top = -98.0
+margin_right = 160.0
+margin_bottom = -82.0
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "Dracus Mump (male, 34)"
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -10,6 +10,7 @@ var doctor: Doctor
 
 func set_doctor(doctor: Doctor, room: int):
 	self.level = room / 100 # set floor number
+	self.room = room % 100
 	
 	var Door: PackedScene = preload("res://objects/door.tscn")
 	

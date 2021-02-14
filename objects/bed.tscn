@@ -22,3 +22,13 @@ margin_bottom = -16.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="patient" type="ColorRect" parent="."]
+margin_left = -20.0
+margin_top = -39.0
+margin_right = 20.0
+margin_bottom = 38.0
+color = Color( 0.603922, 0.764706, 0.615686, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

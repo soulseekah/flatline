@@ -1,4 +1,10 @@
 extends Node2D
 
-func set_patient():
-	return self
+var patient: Patient
+
+func set_patient(patient: Patient):
+	self.patient = patient
+	$patient.visible = true if self.patient else false
+
+func _ready():
+	pass

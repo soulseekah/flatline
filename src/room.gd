@@ -2,17 +2,22 @@ extends Node2D
 
 class_name Room
 
-var beds: Array
+var beds: Array = []
 var doctor: Doctor
 
 var number: int
 
-func set_beds(beds: Array):
-	self.beds = beds
+func set_beds():
+	var Bed: PackedScene = preload("res://objects/bed.tscn")
+	
+	for b in range(0, 5):
+		var bed = Bed.instance()
+		bed.set_patient(Main.beds.get("%d:%d" % [number, b]).patient)
+		self.beds.append(bed)
 	
 	var x: int = 64
 	for bed in self.beds:
-		bed.position.y = 160
+		bed.position.y = 260
 		bed.position.x = x
 		self.add_child(bed)
 		x += 123
@@ -41,4 +46,14 @@ func previous_bed():
 
 # Enter monitor mode maybe
 func select_bed():
-	print(self._get_bed_index())
+	var Monitor: PackedScene = preload("res://ui/monitor.tscn")
+	
+	var patient: Patient = self.beds[self._get_bed_index()].patient
+	var monitor = Monitor.instance()
+	monitor.set_patient(patient)
+	
+	monitor.position.x = 640 / 2
+	monitor.position.y = 480 / 2
+	add_child(monitor)
+	
+	Main.can_move = false

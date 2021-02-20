@@ -52,9 +52,8 @@ func previous_bed():
 func select_bed():
 	var Monitor: PackedScene = preload("res://ui/monitor.tscn")
 	
-	var patient: Patient = self.beds[self._get_bed_index()].patient
 	var monitor = Monitor.instance()
-	monitor.set_patient(patient)
+	monitor.set_patient(self.beds[self._get_bed_index()].patient)
 	
 	monitor.position.x = 640 / 2
 	monitor.position.y = 280

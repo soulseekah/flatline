@@ -50,7 +50,7 @@ func send_message(message):
 	self.animation.queue("type")
 	self.animation.queue("slide-out")
 
-func queue_message(time, message, group = 0):
+func queue_message(time, message, group = -1):
 	for m in messages:
 		if m[1] == message:
 			return
@@ -58,12 +58,19 @@ func queue_message(time, message, group = 0):
 
 func unqueue_group(group):
 	self.unqueues.append(group)
+	
+func skip():
+	if not self.animation.is_playing():
+		return
+	self.animation.stop()
+	self.animation.clear_queue()
+	self.animation.queue("slide-out")
 
 func _process(delta):
 	for i in range(self.messages.size()):
 		if self.animation.is_playing():
 			break
-		
+
 		if self.messages[i][2] in self.unqueues:
 			self.messages.remove(i)
 			break

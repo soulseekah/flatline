@@ -32,7 +32,7 @@ func _ready():
 	self.pager.position.y = 380
 	
 	self.pager.queue_message(3, "Good morning, Dr. Flatline :) Welcome to your shift!")
-	self.pager.queue_message(6, "Move using WASD or arrow keys.")
+	self.pager.queue_message(6, "Move using WASD or arrow keys. Space to skip messages.")
 	self.pager.queue_message(9, "Go save your first patient in room 606... That's six-zero-six!")
 	
 	self.call_deferred("add_child", self.pager)
@@ -103,6 +103,9 @@ func _process(delta):
 					break
 
 func _input(e):
+	if Input.is_action_just_pressed("space"):
+		self.pager.skip()
+		
 	if Input.is_action_just_pressed("down") and get_node("Room/Monitor"):
 		self.can_move = true
 		self.room.remove_child(get_node("Room/Monitor"))

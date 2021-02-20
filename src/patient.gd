@@ -61,6 +61,7 @@ func _process(delta):
 	
 	# And dissolves
 	# TODO: dissolve the shit that happened above
+	# TODO: heal faster
 	
 	# self.sys = 120 * (1 - abs((70 - self.hr) / 100))
 	# self.dia = 80 * (1 - abs((70 - self.hr) / 100))

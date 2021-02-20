@@ -54,9 +54,14 @@ func _process(delta):
 	return
 	
 func _input(e):
-	if get_node("Room/Monitor") and Input.is_action_just_pressed("down"):
+	if Input.is_action_just_pressed("down") and get_node("Room/Monitor"):
 		self.can_move = true
 		self.room.remove_child(get_node("Room/Monitor"))
+		return
+		
+	if Input.is_action_just_pressed("down") and get_node("Elevator"):
+		self.can_move = true
+		self.remove_child(get_node("Elevator"))
 		return
 	
 	if not self.can_move:
@@ -77,10 +82,10 @@ func _input(e):
 	
 	if self.level:
 		if Input.is_action_just_pressed("left"):
-			self.doctor.position.x = self.level.previous_door().global_position.x
+			self.level.previous_door()
 			
 		if Input.is_action_just_pressed("right"):
-			self.doctor.position.x = self.level.next_door().global_position.x
+			self.level.next_door()
 			
 		if Input.is_action_just_pressed("up"):
 			if self.level.room in [0, 10]:
@@ -88,7 +93,7 @@ func _input(e):
 				var elevator = Elevator.instance()
 				elevator.find_node("number").text = str(self.level.level)
 				elevator.position.x = 320
-				elevator.position.y = 240
+				elevator.position.y = 275
 				elevator.direction = "east" if self.level.room == 10 else "west"
 				
 				self.call_deferred("add_child", elevator)
@@ -101,7 +106,7 @@ func _input(e):
 				var Room: PackedScene = preload("res://scenes/room.tscn")
 				
 				self.room = Room.instance()
-				self.room.number = (self.level.level * 100) + self.level.room
+				self.room.set_number((self.level.level * 100) + self.level.room)
 				self.room.set_beds()
 				self.room.set_doctor(doctor)
 				
@@ -117,5 +122,4 @@ func goto_floor(number, direction):
 	self._enter_level((number * 100) + (0 if direction == "west" else 10))
 
 func connect_patient(patient):
-	
 	self.patients[patient.id].connected = true

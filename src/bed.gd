@@ -8,3 +8,8 @@ func set_patient(patient: Patient):
 
 func _ready():
 	pass
+
+func _process(delta):
+	if self.patient and self.patient.connected:
+		$monitor_on.show()
+		$monitor_off.hide()

@@ -1,50 +1,33 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/elevator.gd" type="Script" id=1]
 [ext_resource path="res://assets/elevator.png" type="Texture" id=2]
+[ext_resource path="res://assets/PressStart2P-vaV7.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/elevator-button.png" type="Texture" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 37
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 26
+font_data = ExtResource( 3 )
 
 [node name="Elevator" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="elevator" type="Sprite" parent="."]
-position = Vector2( 4.75001, 0.764574 )
-scale = Vector2( 0.212704, 0.212704 )
+scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 2 )
 
-[node name="level" type="ColorRect" parent="."]
-margin_left = -72.0
-margin_top = -16.0
-margin_right = -32.0
-margin_bottom = 24.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="number" type="RichTextLabel" parent="level"]
-margin_left = 15.0
-margin_top = 13.0
-margin_right = 31.0
-margin_bottom = 29.0
-custom_colors/default_color = Color( 0, 0, 0, 1 )
-text = "4"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="up" type="ColorRect" parent="."]
-margin_left = -72.0
-margin_top = -40.0
-margin_right = -32.0
-margin_bottom = -24.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="down" type="ColorRect" parent="."]
-margin_left = -72.0
-margin_top = 32.0
-margin_right = -32.0
-margin_bottom = 48.0
+[node name="number" type="Label" parent="."]
+margin_left = -16.0
+margin_top = -136.0
+margin_right = 112.0
+margin_bottom = -80.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.733333, 0.32549, 0.32549, 1 )
+text = "9"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -52,85 +35,220 @@ __meta__ = {
 [node name="buttons" type="Node2D" parent="."]
 position = Vector2( 56, 48 )
 
-[node name="1" type="Button" parent="buttons"]
-margin_left = -64.0
-margin_top = -88.0
-margin_right = -40.0
-margin_bottom = -64.0
+[node name="1" type="TextureButton" parent="buttons"]
+margin_left = -120.0
+margin_top = -96.0
+margin_right = -80.0
+margin_bottom = -56.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="Sprite" parent="buttons/1"]
+position = Vector2( 8, 8 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 4 )
+
+[node name="1" type="Label" parent="buttons/1/1"]
+margin_left = -12.5
+margin_top = -11.25
+margin_right = 27.5
+margin_bottom = 24.75
+custom_fonts/font = SubResource( 2 )
 text = "1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="2" type="Button" parent="buttons"]
-margin_left = -32.0
-margin_top = -88.0
-margin_right = -8.0
-margin_bottom = -64.0
+[node name="2" type="TextureButton" parent="buttons"]
+margin_left = -61.0
+margin_top = -96.0
+margin_right = -21.0
+margin_bottom = -56.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="Sprite" parent="buttons/2"]
+position = Vector2( 8, 8 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 4 )
+
+[node name="1" type="Label" parent="buttons/2/1"]
+margin_left = -11.25
+margin_top = -11.25
+margin_right = 28.75
+margin_bottom = 24.75
+custom_fonts/font = SubResource( 2 )
 text = "2"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="3" type="Button" parent="buttons"]
-margin_top = -88.0
-margin_right = 24.0
-margin_bottom = -64.0
+[node name="3" type="TextureButton" parent="buttons"]
+margin_top = -96.0
+margin_right = 40.0
+margin_bottom = -56.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="Sprite" parent="buttons/3"]
+position = Vector2( 8, 8 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 4 )
+
+[node name="1" type="Label" parent="buttons/3/1"]
+margin_left = -11.25
+margin_top = -11.25
+margin_right = 28.75
+margin_bottom = 24.75
+custom_fonts/font = SubResource( 2 )
 text = "3"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="4" type="Button" parent="buttons"]
-margin_left = -64.0
-margin_top = -56.0
-margin_right = -40.0
-margin_bottom = -32.0
+[node name="4" type="TextureButton" parent="buttons"]
+margin_left = -120.0
+margin_top = -48.0
+margin_right = -80.0
+margin_bottom = -8.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="Sprite" parent="buttons/4"]
+position = Vector2( 8, 8 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 4 )
+
+[node name="1" type="Label" parent="buttons/4/1"]
+margin_left = -12.5
+margin_top = -11.25
+margin_right = 27.5
+margin_bottom = 24.75
+custom_fonts/font = SubResource( 2 )
 text = "4"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="5" type="Button" parent="buttons"]
-margin_left = -32.0
-margin_top = -56.0
-margin_right = -8.0
-margin_bottom = -32.0
+[node name="5" type="TextureButton" parent="buttons"]
+margin_left = -61.0
+margin_top = -48.0
+margin_right = -21.0
+margin_bottom = -8.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="Sprite" parent="buttons/5"]
+position = Vector2( 8, 8 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 4 )
+
+[node name="1" type="Label" parent="buttons/5/1"]
+margin_left = -11.25
+margin_top = -11.25
+margin_right = 28.75
+margin_bottom = 24.75
+custom_fonts/font = SubResource( 2 )
 text = "5"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="6" type="Button" parent="buttons"]
-margin_top = -56.0
-margin_right = 24.0
-margin_bottom = -32.0
+[node name="6" type="TextureButton" parent="buttons"]
+margin_top = -48.0
+margin_right = 40.0
+margin_bottom = -8.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="Sprite" parent="buttons/6"]
+position = Vector2( 8, 8 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 4 )
+
+[node name="1" type="Label" parent="buttons/6/1"]
+margin_left = -11.25
+margin_top = -11.25
+margin_right = 28.75
+margin_bottom = 24.75
+custom_fonts/font = SubResource( 2 )
 text = "6"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="7" type="Button" parent="buttons"]
-margin_left = -64.0
-margin_top = -24.0
-margin_right = -40.0
+[node name="7" type="TextureButton" parent="buttons"]
+margin_left = -120.0
+margin_right = -80.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="Sprite" parent="buttons/7"]
+position = Vector2( 8, 8 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 4 )
+
+[node name="1" type="Label" parent="buttons/7/1"]
+margin_left = -12.5
+margin_top = -11.25
+margin_right = 27.5
+margin_bottom = 24.75
+custom_fonts/font = SubResource( 2 )
 text = "7"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="8" type="Button" parent="buttons"]
-margin_left = -32.0
-margin_top = -24.0
-margin_right = -8.0
+[node name="8" type="TextureButton" parent="buttons"]
+margin_left = -61.0
+margin_right = -21.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="Sprite" parent="buttons/8"]
+position = Vector2( 8, 8 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 4 )
+
+[node name="1" type="Label" parent="buttons/8/1"]
+margin_left = -11.25
+margin_top = -11.25
+margin_right = 28.75
+margin_bottom = 24.75
+custom_fonts/font = SubResource( 2 )
 text = "8"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="9" type="Button" parent="buttons"]
-margin_top = -24.0
-margin_right = 24.0
+[node name="9" type="TextureButton" parent="buttons"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="Sprite" parent="buttons/9"]
+position = Vector2( 8, 8 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 4 )
+
+[node name="1" type="Label" parent="buttons/9/1"]
+margin_left = -11.25
+margin_top = -11.25
+margin_right = 28.75
+margin_bottom = 24.75
+custom_fonts/font = SubResource( 2 )
 text = "9"
 __meta__ = {
 "_edit_use_anchors_": false

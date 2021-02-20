@@ -1,6 +1,45 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/floor.gd" type="Script" id=1]
+[ext_resource path="res://assets/corridor-west.png" type="Texture" id=2]
+[ext_resource path="res://assets/corridor.png" type="Texture" id=3]
+[ext_resource path="res://assets/corridor-east.png" type="Texture" id=4]
+[ext_resource path="res://assets/PressStart2P-vaV7.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 10
+font_data = ExtResource( 5 )
 
 [node name="Floor" type="Node2D"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [  ]
+}
+
+[node name="corridor" type="Node2D" parent="."]
+position = Vector2( 0, 32 )
+
+[node name="corridor-west" type="Sprite" parent="corridor"]
+position = Vector2( 320, 240 )
+texture = ExtResource( 2 )
+
+[node name="corridor-central" type="Sprite" parent="corridor"]
+position = Vector2( 960, 240 )
+texture = ExtResource( 3 )
+
+[node name="corridor-east" type="Sprite" parent="corridor"]
+position = Vector2( 1600, 240 )
+texture = ExtResource( 4 )
+
+[node name="number" type="RichTextLabel" parent="."]
+margin_left = 130.0
+margin_top = 210.0
+margin_right = 213.0
+margin_bottom = 229.0
+custom_fonts/normal_font = SubResource( 1 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "101"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}

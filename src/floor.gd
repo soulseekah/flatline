@@ -2,65 +2,74 @@ extends Node2D
 
 class_name Floor
 
-var doors: Node2D
+var numbers: Array = []
 var level: int
 var room: int
 
 var doctor: Doctor
 
+const DOCTOR_SLOT_RIGHT = 560
+const DOCTOR_SLOT_LEFT = 80
+const DOCTOR_SLOT_MID = 300
+
 func set_doctor(doctor: Doctor, room: int):
 	self.level = room / 100 # set floor number
 	self.room = room % 100
 	
-	var Door: PackedScene = preload("res://objects/door.tscn")
-	
-	self.doors = Node2D.new()
-	
-	for i in range(0, 11):
-		var door = Door.instance()
-		if i in [0, 10]:
-			door.find_node("number").text = "lift"
-		else:
-			door.find_node("number").text = "%d%02d" % [self.level, i]
-		door.position.y = 240
-		door.position.x = i * 240
-		self.doors.add_child(door)
-	
-	self.add_child(self.doors)
-	self._scroll_into_view(self.doors.get_child(room % 100))
+	for i in range(0, 3): # create numbers
+		var number = $number.duplicate()
+		numbers.append(number)
+		
+		var position = $number.get_rect().position
+		position.x += i * 224
+		number.set_position(position)
+		
+		number.hide()
+		self.add_child(number)
+	$number.hide()
 	
 	self.doctor = doctor
-	if room % 100 in [0, 10]:
-		self.doctor.position.x = 80 if room % 100 == 0 else 560
-	else:
-		self.doctor.position.x = 640/2
-	self.doctor.position.y = 320
+	self.doctor.position.y = 260
 	
+	self._scroll_into_view()
+
 	self.add_child(self.doctor)
 
-func _get_door_index():
-	var d = 0 # Door number
-	for door in self.doors.get_children():
-		var width = door.find_node("door").get_size().x
-		if self.doctor.position.x > (door.global_position.x - (width / 2)) and self.doctor.position.x < (door.global_position.x + (width / 2)):
-			break
-		d += 1
-	return clamp(d, 0, self.doors.get_child_count() - 1)
-	
 func previous_door():
-	self.room = clamp(self._get_door_index() - 1, 0, self.doors.get_child_count() - 1)
-	return self._scroll_into_view(self.doors.get_child(self.room))
+	self.room = clamp(self.room - 1, 0, 10)
+	self._scroll_into_view()
 	
 func next_door():
-	self.room = clamp(self._get_door_index() + 1, 0, self.doors.get_child_count() - 1)
-	return self._scroll_into_view(self.doors.get_child(self.room))
+	self.room = clamp(self.room + 1, 0, 10)
+	self._scroll_into_view()
 	
-func _scroll_into_view(door: Node2D):
-	if door.position.x < 200:
-		self.doors.position.x = 80
-	elif door.position.x > 2300:
-		self.doors.position.x = -1840
+func _scroll_into_view():
+	self.numbers[0].show()
+	self.numbers[1].show()
+	self.numbers[2].show()
+	
+	if self.room == 0:
+		$corridor.position.x = 0
+		self.doctor.position.x = self.DOCTOR_SLOT_LEFT
+		self.numbers[0].hide()
+		self.numbers[1].text = '%d%02d' % [self.level, self.room + 1]
+		self.numbers[2].text = '%d%02d' % [self.level, self.room + 2]
+	elif self.room == 10:
+		$corridor.position.x = -1280
+		self.doctor.position.x = self.DOCTOR_SLOT_RIGHT
+		self.numbers[0].text = '%d%02d' % [self.level, self.room - 2]
+		self.numbers[1].text = '%d%02d' % [self.level, self.room - 1]
+		self.numbers[2].hide()
 	else:
-		if (door.global_position.x != 320):
-			self.doors.position.x += 320 - door.global_position.x
-	return door
+		if self.room < 2:
+			$corridor.position.x = 0
+			self.numbers[0].hide()
+		elif self.room > 8:
+			$corridor.position.x = -1280
+			self.numbers[2].hide()
+		else:
+			$corridor.position.x = -640
+		self.numbers[0].text = '%d%02d' % [self.level, self.room - 1]
+		self.numbers[1].text = '%d%02d' % [self.level, self.room]
+		self.numbers[2].text = '%d%02d' % [self.level, self.room + 1]
+		self.doctor.position.x = self.DOCTOR_SLOT_MID

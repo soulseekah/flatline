@@ -7,6 +7,10 @@ var doctor: Doctor
 
 var number: int
 
+func set_number(number):
+	self.number = number
+	$number.text = str(number)
+
 func set_beds():
 	var Bed: PackedScene = preload("res://objects/bed.tscn")
 	
@@ -17,22 +21,22 @@ func set_beds():
 	
 	var x: int = 64
 	for bed in self.beds:
-		bed.position.y = 260
+		bed.position.y = 180
 		bed.position.x = x
 		self.add_child(bed)
-		x += 123
+		x += 121
 
 func set_doctor(doctor: Doctor):
 	self.doctor = doctor
 	self.doctor.position.x = self.beds[2].position.x
-	self.doctor.position.y = 320
+	self.doctor.position.y = 260
 	self.add_child(self.doctor)
 
 # Returns the bed facing the doctor
 func _get_bed_index():
 	var b = 0 # Bed number
 	for bed in self.beds:
-		var width = bed.find_node("bed").get_size().x
+		var width = bed.find_node("bed").get_texture().get_size().x
 		if self.doctor.position.x > (bed.position.x - (width / 2)) and self.doctor.position.x < (bed.position.x + (width / 2)):
 			break
 		b += 1
@@ -53,7 +57,7 @@ func select_bed():
 	monitor.set_patient(patient)
 	
 	monitor.position.x = 640 / 2
-	monitor.position.y = 480 / 2
+	monitor.position.y = 280
 	add_child(monitor)
 	
 	Main.can_move = false

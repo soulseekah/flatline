@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/room.gd" type="Script" id=1]
 [ext_resource path="res://assets/room.png" type="Texture" id=2]
+[ext_resource path="res://assets/PressStart2P-vaV7.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 9
+extra_spacing_top = 5
+font_data = ExtResource( 3 )
 
 [node name="Room" type="Node2D"]
 script = ExtResource( 1 )
@@ -9,3 +15,15 @@ script = ExtResource( 1 )
 [node name="room" type="Sprite" parent="."]
 position = Vector2( 320, 240 )
 texture = ExtResource( 2 )
+
+[node name="number" type="RichTextLabel" parent="."]
+margin_left = 378.0
+margin_top = 457.0
+margin_right = 426.0
+margin_bottom = 479.0
+custom_fonts/normal_font = SubResource( 1 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "235"
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -25,6 +25,11 @@ _global_script_classes=[ {
 "path": "res://src/elevator.gd"
 }, {
 "base": "Node2D",
+"class": "Fade",
+"language": "GDScript",
+"path": "res://src/fade.gd"
+}, {
+"base": "Node2D",
 "class": "Floor",
 "language": "GDScript",
 "path": "res://src/floor.gd"
@@ -53,6 +58,7 @@ _global_script_class_icons={
 "Audio": "",
 "Doctor": "",
 "Elevator": "",
+"Fade": "",
 "Floor": "",
 "Pager": "",
 "Patient": "",
@@ -64,6 +70,11 @@ _global_script_class_icons={
 
 config/name="fl_tline"
 run/main_scene="res://scenes/title.tscn"
+boot_splash/image="res://assets/load.png"
+
+[audio]
+
+default_bus_layout="res://misc/bus.tres"
 
 [autoload]
 

@@ -8,32 +8,40 @@
 - [x] DRAW:
 	- [x] pager (1 hour)
 	- [x] title screen (1 hour)
-
-- make sys and dia work
-- fix the labels!!! they are cut at the top
-
-- title screen
+- [x] fix the labels!!! they are cut at the top
+- [x] title screen
+- [x] make sys and dia work
+- [x] totorial in room 606 loops
+- [x] healing should make health up faster
+- [x] sometimes patient 0 dies or heals up
+- [x] don't critical when patient is no longer critical
+- [x] slow monitor display down
+- [x] loading screen
+- [x] fade in and out on exit/entry
 - SFX:
-	- elevator sounds
-	- door sounds
-	- menu sound
-	- monitor button sounds
-	- patient heal sounds
+	- [x] menu sound
+	- [x] elevator sounds
+	- [x] door sounds
+	- [x] patient heal sounds
+	- [x] monitor button sounds
+		- [x] beta
+		- [x] symps
+		- [x] cpr [breaking ribs]
+		- [x] defib [clear, bzzz]
+	- [x] title button press (start!)
+	- [x] add reverb effect in corridor (i really want to do this, sound busses)
+- [x] monitor lags by too much
+- [x] pager skip needs improvement (skip while skipping)
+- [x] add more announcements (funny ones)
 
-- healing should make health up faster
-
-- fade in and out on exit/entry
-- totorial in room 606 loops
-- long animations for elevator
-- add more announcements (funny ones)
-
-- add reverb effect in corridor
-- sometimes patient 0 dies
-- pager skip needs improvement (skip while skipping)
+- submit the game
+	- [ ] screenshots
+	- [ ] description
+	- [ ] upload builds
 
 - animate monitor signal, color
-- checkout is possible in unstable condition
 - list all patients somewhere
+- randomize tutorial room
 - minigames:
 	- connect: find heart on dark screen
 	- defib: just press buttons (3 buttons: CHARGE, CLEAR, BANG!)

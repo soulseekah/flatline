@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/defib.ogg-9b1dfd5a5213f349cebdbf79f354f4c2.oggstr"
+
+[deps]
+
+source_file="res://assets/defib.ogg"
+dest_files=[ "res://.import/defib.ogg-9b1dfd5a5213f349cebdbf79f354f4c2.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

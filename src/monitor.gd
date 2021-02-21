@@ -3,6 +3,8 @@ extends Node2D
 var patient: int = -1
 var frames: int = 0
 
+var updated: bool = false
+
 func _ready():
 	$connect.connect("pressed", Main, "connect_patient", [self.patient])
 	$beta.connect("pressed", self, "betalize")
@@ -42,9 +44,17 @@ func _process(delta):
 		$name.text = "%s (%s, %d)" % [patient._name, patient.gender, patient.age]
 		$connect.disabled = true
 		
-		$hr/bpm.text = "%03d BPM" % patient.hr
-		$bp/sys.text = "%03d mm/Hg sys" % patient.sys
-		$bp/dia.text = "%03d mm/Hg dia" % patient.dia
+		if not self.updated:
+			$hr/bpm.text = "%03d\nBPM" % patient.hr
+			$bp/sys.text = "%03d mm/Hg sys" % patient.sys
+			$bp/dia.text = "%03d mm/Hg dia" % patient.dia
+			self.updated = true
+		
+		if not $beta.disabled:
+			if frames % 70 == 0:
+				$hr/bpm.text = "%03d\nBPM" % patient.hr
+				$bp/sys.text = "%03d mm/Hg sys" % patient.sys
+				$bp/dia.text = "%03d mm/Hg dia" % patient.dia
 		
 		if frames % 6 == 0:
 			$hr/signal.frame = ($hr/signal.frame + 1) % $hr/signal.hframes
@@ -57,7 +67,7 @@ func _process(delta):
 			$connect.modulate = Color(1, 1, 1, 1)
 			$connect.disabled = false
 		
-		$hr/bpm.text = "--- BPM"
+		$hr/bpm.text = "---\nBPM"
 		$bp/sys.text = "--- mm/Hg sys"
 		$bp/dia.text = "--- mm/Hg dia"
 		
@@ -67,13 +77,17 @@ func _process(delta):
 		$defibrillate.disabled = false
 
 func betalize():
+	Main.audio.play("beta")
 	Main.patients[self.patient].medication += 2.5
 
 func sympath():
+	Main.audio.play("symp")
 	Main.patients[self.patient].medication -= 2.5
 
 func cpr():
+	Main.audio.play("cpr")
 	Main.patients[self.patient].cpr()
 	
 func defib():
+	Main.audio.play("defib")
 	Main.patients[self.patient].defib()

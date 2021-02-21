@@ -48,6 +48,9 @@ func _process(delta):
 	self.health -= (abs(70 - self.hr) - 20) * delta * 0.025
 	if self.hr < 20 or self.hr > 170:
 		self.health -= 5 * delta
+	elif self.hr > 60 and self.hr < 80:
+		Main.pager.unqueue_group(self.id)
+		self.health += 3 * delta
 	
 	# HR changes with direction and medication
 	self.hr -= self.direction * delta + (self.medication * delta)
@@ -58,15 +61,11 @@ func _process(delta):
 	
 	# Shit happens
 	self.direction += -0.01 if randi() % 2 else 0.01
+	if self.hr > 60 and self.hr < 80: # but not as drastically
+		self.direction *= 0.5
 	
-	# And dissolves
-	# TODO: dissolve the shit that happened above
-	# TODO: heal faster
-	
-	# self.sys = 120 * (1 - abs((70 - self.hr) / 100))
-	# self.dia = 80 * (1 - abs((70 - self.hr) / 100))
-	
-	# print([self.id, self.hr, self.direction, self.medication, self.health])
+	self.sys = clamp(((self.hr - 70 + 120) if self.hr < 170 else (-(2 * self.hr) + 180 + 180)) + self.direction, 0, 320)
+	self.dia = clamp(((self.hr - 70 + 80) if self.hr < 170 else (-(2 * self.hr) + 180 + 180)) + self.direction, 0, 300)
 
 func cpr():
 	if self.hr > 5:

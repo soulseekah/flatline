@@ -9,6 +9,7 @@ onready var animation: AnimationPlayer = AnimationPlayer.new()
 
 var messages: Array = []
 var unqueues: Array = []
+var skipping: bool = false
 
 func _ready():
 	add_child(self.animation)
@@ -31,6 +32,7 @@ func _ready():
 	
 func send_message(message):
 	Main.audio.play("beeper")
+	self.skipping = false
 	
 	var type = Animation.new()
 	type.loop = false
@@ -60,8 +62,9 @@ func unqueue_group(group):
 	self.unqueues.append(group)
 	
 func skip():
-	if not self.animation.is_playing():
+	if not self.animation.is_playing() or self.skipping:
 		return
+	self.skipping = true
 	self.animation.stop()
 	self.animation.clear_queue()
 	self.animation.queue("slide-out")

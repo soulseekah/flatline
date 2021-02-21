@@ -8,10 +8,12 @@ var room: Room
 var level: Floor
 var status: Status
 var pager: Pager
+var fade: Fade
 
 var audio: Audio
 
 var can_move: bool
+var tutorial_done: bool = false
 
 var time: float = 0.0
 
@@ -21,15 +23,28 @@ func _ready():
 	var Audio: PackedScene = preload("res://misc/audio.tscn")
 	self.audio = Audio.instance()
 	self.call_deferred("add_child", self.audio)
+	
+	var Fade: PackedScene = preload("res://misc/fade.tscn")
+	self.fade = Fade.instance()
+	self.fade.z_index = 5
+	self.call_deferred("add_child", self.fade)
+	
+	self.fade.in(0.02)
 
 func start():
+	if not self.fade.done:
+		return
+	
 	randomize()
+	
+	self.fade.out(1.0)
+	self.audio.play("click")
 	
 	self.time = 0
 	
 	get_tree().get_root().call_deferred("remove_child", get_node("/root/Title"))
 	
-	self.audio.play("background", true, -15.0)
+	self.audio.play("background", true, -15.0, "speakers")
 	
 	var Status: PackedScene = preload("res://ui/status.tscn")
 	self.status = Status.instance()
@@ -61,13 +76,19 @@ func start():
 	patient._name = "Test Dummy"
 	patient.gender = "male"
 	patient.age = 35
-	patient.health = 90
+	patient.health = 80
+	patient.hr = 120
 	self.patients.insert(patient.id, patient)
 	self.beds["606:4"]['patient'] = patient.id
 	
 	self._enter_level(100)
 	
 func _enter_level(number: int):
+	self.fade.out(1.0)
+	self.fade.in(0.1)
+	
+	AudioServer.get_bus_effect(1, 0).cutoff_hz = 17000
+	
 	var Doctor: PackedScene = preload("res://objects/doctor.tscn")
 	self.doctor = Doctor.instance()
 	
@@ -107,6 +128,9 @@ func _process(delta):
 					break
 
 func _input(e):
+	if not Main.fade.done:
+		return
+		
 	if Input.is_action_just_pressed("space"):
 		self.pager.skip()
 		
@@ -152,22 +176,31 @@ func _input(e):
 				elevator.position.y = 275
 				elevator.direction = "east" if self.level.room == 10 else "west"
 				
+				self.audio.play("elevator")
+				
 				self.call_deferred("add_child", elevator)
 				
 				self.can_move = false
 			else:
 				var Doctor: PackedScene = preload("res://objects/doctor.tscn")
 				self.doctor = Doctor.instance()
+				
+				self.audio.play("door")
+				AudioServer.get_bus_effect(1, 0).cutoff_hz = 900
 	
 				var Room: PackedScene = preload("res://scenes/room.tscn")
 				
-				if self.difficulty == 0 and ((self.level.level * 100) + self.level.room == 606):
+				if self.difficulty == 0 and ((self.level.level * 100) + self.level.room == 606) and not self.tutorial_done:
 					self.pager.queue_message(12, "Approach the patient, use the monitor and connect them up. Stat.")
+					self.tutorial_done = true
 				
 				self.room = Room.instance()
 				self.room.set_number((self.level.level * 100) + self.level.room)
 				self.room.set_beds()
 				self.room.set_doctor(doctor)
+				
+				self.fade.out(1.0)
+				self.fade.in(0.1)
 				
 				self.call_deferred("remove_child", get_node("Floor"))
 				self.call_deferred("add_child", self.room)
@@ -208,6 +241,8 @@ func die(patient):
 func checkout(patient):
 	if patient == 0:
 		self.difficulty = 1
+		
+	self.audio.play("claps")
 		
 	self.patients[patient].connected = false
 	for bed in beds.keys():

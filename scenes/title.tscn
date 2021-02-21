@@ -39,9 +39,9 @@ custom_colors/font_color = Color( 0.847059, 0.831373, 0.694118, 1 )
 text = "Godot Wild Jam 30
 
 dev/audio: soulseekah
-art: SearForHire
+art: searhere
 
-github.com/soulseekah/fl_atline"
+github.com/soulseekah/flatline"
 __meta__ = {
 "_edit_use_anchors_": false
 }

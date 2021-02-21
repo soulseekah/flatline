@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/cpr.ogg-cb33adbd4d0260267c0258b1fcca0900.oggstr"
+
+[deps]
+
+source_file="res://assets/cpr.ogg"
+dest_files=[ "res://.import/cpr.ogg-cb33adbd4d0260267c0258b1fcca0900.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

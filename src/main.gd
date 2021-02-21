@@ -18,7 +18,18 @@ var time: float = 0.0
 var difficulty: int = 0
 
 func _ready():
+	var Audio: PackedScene = preload("res://misc/audio.tscn")
+	self.audio = Audio.instance()
+	self.call_deferred("add_child", self.audio)
+
+func start():
 	randomize()
+	
+	self.time = 0
+	
+	get_tree().get_root().call_deferred("remove_child", get_node("/root/Title"))
+	
+	self.audio.play("background", true, -15.0)
 	
 	var Status: PackedScene = preload("res://ui/status.tscn")
 	self.status = Status.instance()
@@ -37,11 +48,6 @@ func _ready():
 	
 	self.call_deferred("add_child", self.pager)
 	
-	var Audio: PackedScene = preload("res://misc/audio.tscn")
-	self.audio = Audio.instance()
-	self.audio.play("background", true, -15.0)
-	self.call_deferred("add_child", self.audio)
-	
 	# Create beds in our hospital
 	for f in range(1, 10):
 		for r in range(1, 10):
@@ -58,8 +64,6 @@ func _ready():
 	patient.health = 90
 	self.patients.insert(patient.id, patient)
 	self.beds["606:4"]['patient'] = patient.id
-	
-	self.call_deferred("remove_child", get_node("Title"))
 	
 	self._enter_level(100)
 	
@@ -179,7 +183,7 @@ func goto_floor(number, direction):
 func connect_patient(patient):
 	if patient == 0:
 		self.pager.queue_message(15, "Beta blockers slow heart rate down. Sympathomimetics speed it up.")
-		self.pager.queue_message(18, "Use CPR on stopped hearts. And defibrillation on hearts that need a reboot.")
+		self.pager.queue_message(18, "Use CPR on stopped hearts defibrillate hearts that need a reboot.")
 		self.pager.queue_message(21, "Keep the hearts pumping at 70 bpm.")
 		self.pager.queue_message(24, "Administering the right medications or procedures saves lives.")
 	self.patients[patient].connected = true
